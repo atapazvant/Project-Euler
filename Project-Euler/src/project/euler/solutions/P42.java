@@ -8,40 +8,10 @@ import java.util.Map;
 
 public class P42 {
 	private static Map<Character, Integer> listOfAlph = new HashMap<Character, Integer>();
-	private static final String filePath = "E:\\DEVELOPMENT\\GIT\\testFirst\\testFirst\\bin\\euler\\keserix\\words.txt";
+	private static final String filePath = "p42";
 	private static List<String> listofWords = new ArrayList<String>();
 	private static List<Integer> listOfCorrespondingValues = new ArrayList<Integer>();
-	private static int counter;
-	
-/*	static
-	{
-		listOfAlph.put('A', 1);
-		listOfAlph.put('B', 2);
-		listOfAlph.put('C', 3);
-		listOfAlph.put('D', 4);
-		listOfAlph.put('E', 5);
-		listOfAlph.put('F', 6);
-		listOfAlph.put('G', 7);
-		listOfAlph.put('H', 8);
-		listOfAlph.put('I', 9);
-		listOfAlph.put('J', 10);
-		listOfAlph.put('K', 11);
-		listOfAlph.put('L', 12);
-		listOfAlph.put('M', 13);
-		listOfAlph.put('N', 14);
-		listOfAlph.put('O', 15);
-		listOfAlph.put('P', 16);
-		listOfAlph.put('Q', 17);
-		listOfAlph.put('R', 18);
-		listOfAlph.put('S', 19);
-		listOfAlph.put('T', 20);
-		listOfAlph.put('U', 21);
-		listOfAlph.put('V', 22);
-		listOfAlph.put('W', 23);
-		listOfAlph.put('X', 24);
-		listOfAlph.put('Y', 25);
-		listOfAlph.put('Z', 26);
-	}*/
+	private static int counter;	
 	
 	public static void main(String[] args) throws IOException{
 		long startTime = System.currentTimeMillis();
@@ -72,12 +42,11 @@ public class P42 {
 			String word = listofWords.get(i);	
 			int sum = 0;
 			for (Character c : word.toCharArray()) {
-				if(c != '"')
-					//sum += listOfAlph.get(c).intValue();
+				if(c != '"')					
 					sum += (int)c - 64;
 			}
 			listOfCorrespondingValues.add(sum);
-			//System.out.println(sum);					
+			
 		}
 	}
 

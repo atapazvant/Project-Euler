@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class P18 {
 	private static int heightOfTree = 100;
-	private final String fileName = "file\\p18.txt";
+	private final String fileName = "p18.txt";
 	private int[][] tree;
 	private BufferedReader bufferedReader;
 

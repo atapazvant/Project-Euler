@@ -1,56 +1,74 @@
 package project.euler.solutions;
 
-import java.util.*;
-
 public class P50 {
 	
-	private static List<Integer> list = new ArrayList<Integer>();
-	private static List<Integer> filteredlist = new ArrayList<Integer>();
 	public static void main(String[] args) {
-		long sTime = System.currentTimeMillis();
+		boolean[] s = primeList(1000000);
+		int[] sq = primeIntegerList(1000000);
 		
-		Solve();
 		
-		long eTime = System.currentTimeMillis();
-		
-		System.out.println("total time : " + (eTime - sTime));
-	}
-
-		private static void Solve() {
-			boolean result;
-			for(int i = 2; i < 1000; i++){
-				result = IsPrime(i);
-				if(result){
-					//System.out.println(i);
-					list.add(i);					
-				}			
-			}
-			
+		long max = 0L;
+		int maxCounter = -1;
+		for (int i = 0; i < sq.length; i++) {			
 			int sum = 0;
-			for(int i = 0; i < list.size(); i++) {
-				sum += list.get(i);
-				if(list.contains((int)sum)) {
-					System.out.println("sum : " + sum);
-					filteredlist.add(sum);
+			for (int j = i; j < sq.length; j++) {
+				sum += sq[j];
+				if(sum > 1000000)
+					break;
+				else if(j - i > maxCounter && sum > max && s[sum]) {
+					max = sum;
+					maxCounter = j - i;
 				}
 			}
-			
-			for(int i = 0; i < filteredlist.size(); i++){
-				System.out.println("filtered sum : " + filteredlist.get(i));
-			}
-			
-			//System.out.println(list.size());
-	}
-
-		private static boolean IsPrime(int i) {
-			if(i == 2 || i == 3)
-				return true;
-			if(i % 2 == 0)
-				return false;
-			for(int k = 3; k <= Math.sqrt(i); k+=2){
-				if(i % k == 0)
-					return false;
-			}
-			return true;
 		}
+				
+		System.out.println(Long.toString(max));
+	}
+	
+	
+	public static boolean[] primeList(int n) {		
+		if(n < 0)
+			throw new IllegalArgumentException();
+		
+		boolean[] lPrimes = new boolean[n + 1];
+		
+		if(n >= 2)
+			lPrimes[2] = true;
+		
+		for (int i = 3; i <= n; i+=2) {
+			lPrimes[i] = true;
+		}		
+		
+		for (int i = 3, end = (int) Math.sqrt(n); i <= end; i += 2) {
+			if (lPrimes[i]) {
+				for (int j = i * i; j <= n; j += i << 1)
+					lPrimes[j] = false;
+			}
+		}
+		
+		return lPrimes;
+	}
+	
+	public static int[] primeIntegerList(int n) {
+		if(n < 0)
+			throw new IllegalArgumentException();
+		
+		boolean[] bList = primeList(n);
+		int count = 0;
+		for (boolean b : bList) {
+			if(b)
+				count++;
+		}
+		
+		int[] primes = new int[count];
+		
+		for (int i = 0, j = 0; i < bList.length; i++) {
+			if(bList[i]) {				
+				primes[j] = i;
+				j++;
+			}
+		}
+		
+		return primes;
+	}
 }
