@@ -1,24 +1,41 @@
 package project.euler.solutions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class P47 {	
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		
-		int search = 4;
-		List<Integer> chain = new ArrayList<Integer>();
-		
-		for (int i = 1; i < 1000000; i++) {
-			if(distinctPrime(i) == search) {
-				chain.add(i);
+		for (int i = 1000; i < 1000000; i++) {			
+			
+			if(haveFourDivisors(i) && haveFourDivisors(i + 1) && haveFourDivisors(i + 2) && haveFourDivisors(i + 3))
+			{
+				System.out.println(i);
+				break;
 			}
 		}
-		
+				
+		System.out.println();
 	}
 
-	private static int distinctPrime(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * 
+	 * @param number
+	 * @return
+	 */
+	private static boolean haveFourDivisors(int number)
+	{		
+		int count = 0;	
+		for (int i = 2; i <= number; i++) {
+			
+			boolean divisor = false;
+			while(number % i == 0)
+			{
+				if(!divisor)
+					count++;
+				divisor = true;				
+				number = number / i;
+			}
+			
+		}
+		
+		return count == 4;
 	}
 }
